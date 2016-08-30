@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 版权所有:杭州火图科技有限公司
  * 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
  *
@@ -87,17 +87,26 @@ var hot = $.extend({}, hot, {
         parent.newTab(url, name);
     },
     tip: {
-        success: function (content, callback) {
+        success: function (content, callback, time) {
             var $msg = $('<div class="hottip-wrap"><div class="layui-layer layui-layer-dialog layui-layer-border layui-layer-msg layui-layer-hui layer-anim hottip-content" style="z-index: 99891018;top: 30%;position: relative;background-color: rgba(28, 175, 154, 0.8);"><div id="" class="layui-layer-content">' + content + '</div></div></div>');
             layer.closeAll("loading");
             $("body").append($msg);
+
+            if (time == 'undefined') {
+                time = 1500;
+            }
+
             setTimeout(function () {
                 $msg.remove();
                 if (typeof callback == 'function')
                     callback();
             }, 1500);
         },
-        error: function (content, callback) {
+        error: function (content, callback, time) {
+            if (time == 'undefined') {
+                time = 3000;
+            }
+
             layer.closeAll("loading");
             var $msg = $('<div class="hottip-wrap"><div class="layui-layer layui-layer-dialog layui-layer-border layui-layer-msg layui-layer-hui layer-anim hottip-content" style="z-index: 99891018;top: 30%;position: relative;background-color: rgba(217, 82, 79, 0.8);"><div id="" class="layui-layer-content">' + content + '</div></div></div>');
             $("body").append($msg);
@@ -107,7 +116,11 @@ var hot = $.extend({}, hot, {
                     callback();
             }, 3000);
         },
-        msg: function (content, callback) {
+        msg: function (content, callback, time) {
+            if (time == 'undefined') {
+                time = 3000;
+            }
+
             layer.closeAll("loading");
             var $msg = $('<div class="hottip-wrap"><div class="layui-layer layui-layer-dialog layui-layer-border layui-layer-msg layui-layer-hui layer-anim hottip-content" style="z-index: 99891018;top: 30%;position: relative;"><div id="" class="layui-layer-content">' + content + '</div></div></div>');
             $("body").append($msg);
@@ -137,7 +150,7 @@ var hot = $.extend({}, hot, {
      */
     paging: function (loadObj, pageNo, totalPages, btnCount) {
         this.currentBtnPage = 0;
-        this.obj = loadObj;
+        this.obj = $(loadObj);
         this.pageNo = pageNo;
         this.totalPages = totalPages;
         this.btnCount = btnCount;

@@ -411,9 +411,9 @@
             setTimeout(function () {
                 hot.tip.success("这是一条正确的提示")
             }, 3000);
-           
+
             //初始化分页
-            var pageinate = new hot.paging($(".pagination"), pageIndex, totalPage, 7);
+            var pageinate = new hot.paging(".pagination", pageIndex, totalPage, 7);
 
             pageinate.init(function (p) {
 
